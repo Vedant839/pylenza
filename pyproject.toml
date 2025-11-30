@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pylenza"
-version = "0.1.0"
+version = "0.1.1"
 description = "A beginner-friendly Python package for learning data structures, algorithms, recursion, and logic."
 readme = "README.md"
 requires-python = ">=3.10"
