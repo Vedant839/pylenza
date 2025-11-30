@@ -16,7 +16,7 @@ The package is ready to publish; for local development you can install in editab
 python -m pip install -e .
 ```
 
-If published on PyPI, users will be able to install with:
+install with:
 
 ```bash
 pip install pylenza
