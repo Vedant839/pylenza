@@ -1,0 +1,12 @@
+# Example .pypirc (DO NOT commit real credentials). Use a PyPI API token.
+[distutils]
+index-servers =
+    pypi
+
+[pypi]
+  repository: https://upload.pypi.org/legacy/
+  username: __token__
+  password: pypi-<YOUR_API_TOKEN_HERE>
+
+# For local publishing with an API token use the password field as the token
+# (username must be '__token__'). Do NOT check secrets into source control.

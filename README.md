@@ -48,6 +48,42 @@ Examples & how to run
 	- python examples/logic_examples.py
 	- python examples/recursion_examples.py
 
+	Publishing to PyPI
+
+	There are two common ways to publish releases:
+
+	1) Manual local publish (useful for quick releases):
+
+		1. Create an API token on PyPI (Account → API tokens) and copy it.
+		2. Either create a local `~/.pypirc` following `.pypirc.example` (username __token__, password = token),
+			or pass credentials directly to twine.
+		3. Build and upload:
+
+	```bash
+	python -m pip install --upgrade build twine
+	python -m build  # produces dist/ wheel and sdist
+	python -m twine upload dist/* --username __token__ --password ${PYPI_TOKEN}
+	```
+
+	2) Automated CI publishing (recommended):
+
+		- A GitHub Actions workflow is included at `.github/workflows/publish.yml`. It will:
+		  - run on pushed git tags that start with `v` (for example `v0.1.0`)
+		  - build wheel and sdist, then publish to PyPI via `twine`.
+
+		- To enable it create a repository secret named `PYPI_API_TOKEN` with the token value
+		  (generated at https://pypi.org/manage/account/ ). Then push a tag:
+
+	```bash
+	git tag v0.1.0
+	git push origin v0.1.0
+	```
+
+	Security note
+
+	- Do NOT store PyPI tokens or credentials in source control. Use GitHub repository secrets for CI or `~/.pypirc` locally.
+
+
 License
 
 This project is distributed under the MIT License.

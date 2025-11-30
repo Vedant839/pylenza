@@ -14,7 +14,6 @@ from . import sort as sort
 from . import strings as strings
 from . import recursion as recursion
 from . import trees as trees
-from . import logic as logic
 
 # -- common/primary names (convenience imports) -----------------------
 from .arrays import PyArray
@@ -22,9 +21,38 @@ from .linkedlist import LinkedList, Node
 from .queue import Queue, EmptyQueueError
 from .stack import Stack, EmptyStackError
 from .trees import TreeNode, BinaryTree, BST
-from .logic.patterns import *
-from .logic.puzzles import *
-from .logic.reasoning import *
+# NOTE: avoid importing `logic.*` at package import time because those submodules
+# can import other pylenza modules and create circular import problems. We
+# expose `logic` and the submodules lazily via __getattr__ below so callers can
+# still do `from pylenza import patterns` (it will import the submodule only
+# when accessed).
+
+
+def __getattr__(name: str):
+	"""Lazy-load logic submodules when requested as attributes of the package.
+
+	Supported names:
+	  - 'logic' -> import pylenza.logic package
+	  - 'patterns', 'puzzles', 'reasoning' -> import pylenza.logic.<name>
+
+	This prevents circular import issues that happen when logic submodules are
+	imported at package import time.
+	"""
+	if name == "logic":
+		import importlib
+
+		mod = importlib.import_module(".logic", __name__)
+		globals()["logic"] = mod
+		return mod
+
+	if name in ("patterns", "puzzles", "reasoning"):
+		import importlib
+
+		sub = importlib.import_module(f".logic.{name}", __name__)
+		globals()[name] = sub
+		return sub
+
+	raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 __all__ = [
 	# modules

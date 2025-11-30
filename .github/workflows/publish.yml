@@ -1,0 +1,39 @@
+name: Publish package
+
+on:
+  push:
+    # Publish when a version tag is pushed (e.g. v0.1.0)
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install build dependencies
+        run: python -m pip install --upgrade build twine
+
+      - name: Build distribution
+        run: python -m build --wheel --sdist
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          python -m pip install --upgrade twine
+          python -m twine upload dist/*
+
+      - name: Clean up artifacts
+        run: rm -rf dist build *.egg-info
+
+    # Note: to publish automatically you must add `PYPI_API_TOKEN` as a
+    # repository secret in your GitHub repo (use a PyPI API token created at
+    # https://pypi.org/manage/account/#api-tokens ).
