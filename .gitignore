@@ -1,0 +1,23 @@
+# Ignore Python virtual environments and build artifacts
+venv/
+ENV/
+.venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pylenza.egg-info/
+
+# pytest cache
+.pytest_cache/
+
+# Editor directories and metadata
+.vscode/
+.idea/
+*.swp
