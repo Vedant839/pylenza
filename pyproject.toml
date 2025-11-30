@@ -1,0 +1,24 @@
+# Minimal pyproject.toml for packaging and publishing
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pylenza"
+version = "0.1.0"
+description = "A beginner-friendly Python package for learning data structures, algorithms, recursion, and logic."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [ { name = "Vedant Shukla", email = "vedantshukla1056@gmail.com" } ]
+
+# Optional dependency used by the arrays module; keep as a regular dependency so
+# typical users installing the package get the convenience of numpy if available.
+dependencies = [
+	"numpy>=1.24.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/Vedant839/pylenza"
+Repository = "https://github.com/Vedant839/pylenza"
+
