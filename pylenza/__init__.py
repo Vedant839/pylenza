@@ -4,6 +4,8 @@ Expose commonly used modules and primary public symbols so callers can
 import either modules (e.g. `from pylenza import sort`) or classes/functions
 directly (e.g. `from pylenza import Stack`).
 """
+# Package version
+__version__ = "0.1.2"
 # re-export submodules for convenience
 from . import arrays as arrays
 from . import linkedlist as linkedlist

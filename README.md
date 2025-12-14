@@ -1,11 +1,13 @@
 # PyLenza
 
-PyLenza is a beginner-friendly Python package for learning data structures, algorithms, recursion, and logical reasoning.
-It provides clean, well-documented teaching helpers and small, self-contained algorithms suitable for learners and interview prep.
+PyLenza is a small, beginner-friendly Python library of readable implementations
+for common data structures and algorithms. Use it when you want clear, well-
+documented examples for teaching, learning, or quick prototyping — not when you
+need optimized production-grade data structures.
 
 Quick highlights
 - Lightweight, readable implementations for common data structures (arrays, linked lists, stacks, queues, trees).
-- Algorithm templates for search & sort plus algorithmic patterns and puzzles (N-Queens, Tower of Hanoi, Kadane, etc.).
+- Algorithm templates for search & sort plus algorithmic patterns and puzzles (Tower of Hanoi, Kadane, etc.).
 - Helpers for recursion, string manipulation, numeric operations and small utilities for learning.
 
 Installation
@@ -31,6 +33,15 @@ arr = PyArray([1, 2, 3, 4])
 arr.append(5)
 print(arr.mean())  # prints the mean
 ```
+
+Minimal runnable example
+
+```bash
+python examples/canonical_example.py
+```
+
+This prints the package version and runs a couple of small operations so you can
+verify the package works directly from the repository.
 
 Modules (overview)
 

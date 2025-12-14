@@ -227,17 +227,28 @@ class LinkedList:
         """Return value of nth node from end (n=0 returns last)."""
         if n < 0:
             raise IndexError("n must be non-negative")
+
+        if self._head is None:
+            raise IndexError("list is empty")
+
         a = self._head
         b = self._head
+
+        # advance `b` n steps; if we walk off the end, n is too large
         for _ in range(n):
             if b is None:
                 raise IndexError("n is larger than list length")
             b = b.next
-        while b is not None and b.next is not None:
+
+        if b is None:
+            # exact length == n -> nth from end does not exist
+            raise IndexError("n is larger than list length")
+
+        # Move both pointers until `b` is at the last node; then `a` is nth from end
+        while b.next is not None:
             a = a.next  # type: ignore
             b = b.next
-        if a is None:
-            raise IndexError("list too short")
+
         return a.value
 
     # --- Iteration & functional utilities ---------------------------
